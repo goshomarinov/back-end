@@ -14,5 +14,5 @@ async function start() {
 
 
     app.get('/', (req, res) => res.render('home', {layout: false}))
-    app.listen(3000, () => console.log('Server running on port 3000.'));
+    app.listen(process.env.PORT, () => console.log('Server running on port 3000.'));
 }
