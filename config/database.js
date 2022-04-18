@@ -3,9 +3,10 @@ require('../models/User');
 
 
 
+
 const dbName = 'job-ads';
 
-const connectionString = `mongodb://localhost:27017/${dbName}`;
+const connectionString = `mongodb://localhost:${process.env.PORT}/${dbName}`;
 
 
 module.exports = async (app) => {
