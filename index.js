@@ -2,6 +2,7 @@ const express = require('express');
 const expressConfig = require('./config/express');
 const databaseConfig = require('./config/database');
 const routesConfig = require('./config/routes');
+const port = 3000;
 
 start()
 
@@ -14,5 +15,5 @@ async function start() {
 
 
     app.get('/', (req, res) => res.render('home', {layout: false}))
-    app.listen(process.env.PORT, () => console.log('Server running on port 3000.'));
+    app.listen(process.env.PORT || port, () => console.log(`Server running on port ${port}.`));
 }
