@@ -4,9 +4,9 @@ const { getAds, getAdById, applyForAd, getUsers } = require('../services/ad');
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
-    const posts = await getAds();
-    const homePosts = posts.slice(0, 3);
-    res.render('home', { title: 'Home Page', homePosts });
+    //const posts = await getAds();
+    //const homePosts = posts.slice(0, 3);
+    res.render('home', { title: 'Home Page', });
 });
 
 router.get('/catalog', async (req, res) => {
