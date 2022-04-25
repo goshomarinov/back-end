@@ -4,8 +4,8 @@ const { getAds, getAdById, applyForAd, getUsers } = require('../services/ad');
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
-    //const posts = await getAds();
-    //const homePosts = posts.slice(0, 3);
+    const posts = await getAds();
+    const homePosts = posts.slice(0, 3);
     res.render('home', { title: 'Home Page', });
 });
 
@@ -18,10 +18,10 @@ router.get('/catalog', async (req, res) => {
 router.get('/details/:id', async (req, res) => {
     const id = req.params.id;
     const post = await getAdById(id);
-    const isApplied =  post.users.some(v => v == req.session.user._id);
+    const isApplied = post.users.some(v => v == req.session.user._id);
     const users = await getUsers(id);
     console.log(users)
-    
+
 
     if (req.session.user) {
         post.hasUser = true;
@@ -53,6 +53,6 @@ router.get('/apply/:id', isUser(), async (req, res) => {
 });
 
 router.get('*', (req, res) => {
-    res.render('404', {title: 'Page Not Found'});
+    res.render('404', { title: 'Page Not Found' });
 })
 module.exports = router;

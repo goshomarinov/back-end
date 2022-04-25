@@ -4,9 +4,9 @@ require('../models/User');
 
 
 
-const dbName = 'job-ads';
+const url = 'mongodb+srv://job-ads:krastavi4ak@cluster0.0przk.mongodb.net/jobAds?retryWrites=true&w=majority';
 
-const connectionString = `mongodb://localhost:${process.env.PORT}/${dbName}`;
+const connectionString = url;
 
 
 module.exports = async (app) => {

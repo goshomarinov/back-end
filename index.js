@@ -10,7 +10,7 @@ async function start() {
     const app = express();
 
     expressConfig(app);
-    //await databaseConfig(app);
+    await databaseConfig(app);
     routesConfig(app);
 
 
