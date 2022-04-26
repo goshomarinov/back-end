@@ -6,7 +6,7 @@ const router = require('express').Router();
 router.get('/', async (req, res) => {
     const posts = await getAds();
     const homePosts = posts.slice(0, 3);
-    res.render('home', { title: 'Home Page', });
+    res.render('home', { title: 'Home Page', homePosts});
 });
 
 router.get('/catalog', async (req, res) => {
@@ -19,8 +19,8 @@ router.get('/details/:id', async (req, res) => {
     const id = req.params.id;
     const post = await getAdById(id);
     const isApplied = post.users.some(v => v == req.session.user._id);
-    const users = await getUsers(id);
-    console.log(users)
+    const users = post.users;
+    
 
 
     if (req.session.user) {
@@ -32,7 +32,7 @@ router.get('/details/:id', async (req, res) => {
             post.isApplied = true;
         }
     }
-    res.render('details', { title: 'Details Page', post })
+    res.render('details', { title: 'Details Page', post, users })
 });
 
 

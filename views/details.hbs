@@ -35,5 +35,13 @@
             {{/if}}
         </article>
 
+        {{#if post.isAuthor}}
+        {{#if users.length > 0}}
+        <p>Aplied Users</p>
+        {{#each users}}
+        <p>{{users}}</p>
+        {{/each}}
+        {{/if}}
+        {{/if}}
     </article>
 </section>
