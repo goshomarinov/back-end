@@ -45,7 +45,8 @@ async function getUserByUsername(email) {
     return user;
 }
 
+
 module.exports = {
     login,
-    register
+    register,
 }

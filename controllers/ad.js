@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { isUser } = require('../middleware/guards');
-const { createAd, getAdById, updateAd, deleteAd } = require('../services/ad');
+const { createAd, getAdById, updateAd, deleteAd, searchAds } = require('../services/ad');
 const mapErrors = require('../util/mapper');
 
 
@@ -88,5 +88,22 @@ router.get('/delete/:id', isUser(), async (req, res) => {
         res.render(`/details/${id}`, { title: 'Details Page', errors });
     }
 });
+
+router.get('/search', (req, res) => {
+
+    res.render('searchHome', { title: 'Search Page' });
+})
+
+router.post('/search', async (req, res) => {
+    const keyword = req.body.search
+    if(keyword != '') {
+        const ads = await searchAds(keyword);
+        console.log(ads)
+
+        res.render('search', { title: 'Search Page', ads });
+    } else {
+        res.render('searchHome', { title: 'Search Page' });
+    }
+})
 
 module.exports = router;

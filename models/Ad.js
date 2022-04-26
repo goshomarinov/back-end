@@ -7,7 +7,8 @@ const adSchema = new Schema({
     companyName: { type: String, required: true, minlength: [3, 'Company name should be at least 3 characters'] },
     description: { type: String, required: true, maxlength: [40, 'Company description should be a maximum of 40 characters long'] },
     author: { type: ObjectId, ref: 'User', required: true },
-    users: { type: [ObjectId], ref: 'User', required: true }
+    users: { type: [ObjectId], ref: 'User', required: true },
+    usersEmail: {type: []}
 
 })
 

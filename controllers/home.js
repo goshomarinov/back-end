@@ -1,5 +1,6 @@
 const { isUser } = require('../middleware/guards');
-const { getAds, getAdById, applyForAd, getUsers } = require('../services/ad');
+const { getAds, getAdById, applyForAd } = require('../services/ad');
+const mapErrors = require('../util/mapper');
 
 const router = require('express').Router();
 
@@ -19,9 +20,8 @@ router.get('/details/:id', async (req, res) => {
     const id = req.params.id;
     const post = await getAdById(id);
     const isApplied = post.users.some(v => v == req.session.user._id);
-    const users = post.users;
-    
-
+    console.log(post.usersEmail)
+    const emails = post.usersEmail.join(', ');
 
     if (req.session.user) {
         post.hasUser = true;
@@ -32,7 +32,7 @@ router.get('/details/:id', async (req, res) => {
             post.isApplied = true;
         }
     }
-    res.render('details', { title: 'Details Page', post, users })
+    res.render('details', { title: 'Details Page', post, emails})
 });
 
 
@@ -41,7 +41,7 @@ router.get('/apply/:id', isUser(), async (req, res) => {
     const post = await getAdById(id);
 
     try {
-        await applyForAd(id, req.session.user._id);
+        await applyForAd(id, req.session.user._id, req.session.user.email);
         res.redirect(`/details/${post._id}`);
     } catch (err) {
         console.error(err);

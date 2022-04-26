@@ -31,17 +31,20 @@ async function deleteAd(id) {
     return Ad.findByIdAndDelete(id);
 }
 
-async function applyForAd(id, userId,) {
+async function applyForAd(id, userId, userEmail) {
     const post = await Ad.findById(id);
 
 
     post.users.push(userId);
+    post.usersEmail.push(userEmail);
 
     await post.save();
 }
 
-async function getUsers(id) {
-    return await getAdById(id);
+async function searchAds(keyword) {
+    const ads = await Ad.find({ headline: new RegExp(`${keyword}`, 'i') }).lean();
+
+    return ads;
 }
 
 module.exports = {
@@ -51,5 +54,5 @@ module.exports = {
     updateAd,
     deleteAd,
     applyForAd,
-    getUsers
+    searchAds
 }
