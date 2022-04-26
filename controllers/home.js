@@ -16,7 +16,7 @@ router.get('/catalog', async (req, res) => {
 });
 
 
-router.get('/details/:id', async (req, res) => {
+router.get('/details/:id', isUser(), async (req, res) => {
     const id = req.params.id;
     const post = await getAdById(id);
     const isApplied = post.users.some(v => v == req.session.user._id);
